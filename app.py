@@ -48,7 +48,4 @@ def download_file(message):
         bot.reply_to(message, 'File compression complete.')
 
 # Start the bot
-bot.polling()
-
-if __name__ == "__app__":
-    app.run(host="0.0.0.0", port=80)
+bot.run(host='0.0.0.0', port=80)
