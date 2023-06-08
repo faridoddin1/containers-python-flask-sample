@@ -49,3 +49,6 @@ def download_file(message):
 
 # Start the bot
 bot.polling()
+
+if __name__ == "__app__":
+    app.run(host="0.0.0.0", port=80)
