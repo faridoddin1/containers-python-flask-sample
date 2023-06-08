@@ -1,15 +1,19 @@
 import os
 import telebot
-from telebot import types
+from flask import Flask, request
 
 # Replace 'YOUR_BOT_TOKEN' with your actual token
-bot = telebot.TeleBot('6189969696:AAHPywUm9GNur1b7jYCFjUueWlKyGd14iLc')
+bot = telebot.TeleBot('6189969696:AAHPywUm9GNur1b7jYCFjUueWlKyGd14iLc)
 
-# Define a handler for the /start command
-@bot.message_handler(commands=['start'])
-def start(message):
-    """Send a welcome message when the /start command is issued."""
-    bot.reply_to(message, 'Hi! I can download and compress video files for you. Just send me any video file in MP4 or MKV format and I will compress it for you.')
+# Create a Flask app object
+app = Flask(__name__)
+
+# Define a route for the Telegram bot webhook
+@app.route('/bot', methods=['POST'])
+def telegram_webhook():
+    update = telebot.types.Update.de_json(request.stream.read().decode('utf-8'))
+    bot.process_new_updates([update])
+    return ''
 
 # Define a handler for file downloads
 @bot.message_handler(content_types=['document'])
@@ -47,5 +51,6 @@ def download_file(message):
 
         bot.reply_to(message, 'File compression complete.')
 
-# infinty polling
-bot.polling(host='0.0.0.0', port=80)
+# Start the Flask app
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=80)
