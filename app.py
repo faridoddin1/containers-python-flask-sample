@@ -47,5 +47,6 @@ def download_file(message):
 
         bot.reply_to(message, 'File compression complete.')
 
-# Start the bot
-bot.run(host='0.0.0.0', port=80)
+# infinty polling
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=80)
