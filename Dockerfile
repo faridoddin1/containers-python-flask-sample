@@ -12,8 +12,8 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Expose a port to Containers 
-EXPOSE 8080
+EXPOSE 80
 
 # Command to run on server
-CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:80", "app:app"]
 
